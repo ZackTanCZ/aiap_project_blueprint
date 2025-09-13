@@ -1,0 +1,24 @@
+cols_to_drop:
+- Feature_x
+- Feature_y
+- Feature_z
+db_url: https://techassessment.blob.core.windows.net/aiap21-assessment-data/gas_monitoring.db
+file_path: data/raw/gas_monitoring.csv
+flat_type_categories:
+- Type_1
+- Type_2
+- Type_3
+new_level: -10
+nominal_features:
+- Feature_3
+- Feature_4
+numerical_features:
+- Feature_1
+- Feautre_2
+ordinal_features:
+- Feature_5
+passthrough_features:
+- Feature_P
+target_feature: null
+test_size: 0.2
+val_size: 0.2

@@ -1,0 +1,25 @@
+# Core data handling and analysis
+pandas==2.3.1
+numpy==2.3.2
+scipy==1.16.1
+
+# Visualization
+matplotlib==3.10.5
+seaborn==0.13.2
+
+# Machine learning
+scikit-learn==1.7.1
+
+# Statistical modeling and analysis
+statsmodels==0.14.5
+scikit-posthocs==0.11.4
+
+# Other utility libraries you might directly import
+Pillow==11.3.0
+PyYAML==6.0.1
+requests==2.31.0
+
+# Jupyter notebook specific libraries
+ipykernel==6.30.0
+jupyter_client==8.6.3
+ipython==9.4.0

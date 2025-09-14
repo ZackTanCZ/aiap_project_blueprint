@@ -62,4 +62,20 @@ class DataPreparation:
         --------
         sklearn.compose.ColumnTransformer: A ColumnTransformer object for preprocessing the data.
         """
-        pass
+        # Instantiate the Pipeline objects each for different transformer
+        numerical_transformer = Pipeline(steps=[("scaler", StandardScaler())])
+        nominal_transformer = Pipeline(steps=[("onehot", OneHotEncoder(handle_unknown = "ignore"))])
+        ordinal_transformer = Pipeline(steps=[("ordinal", OrdinalEncoder(categories = [self.config["flat_type_categories"]],
+                                                                         handle_unknown = "use_encoded_value",
+                                                                         unknown_value = -1,),)])
+        
+        # Instantiate the ColumnTransformer Object to execute the transformer process
+        preprocessor = ColumnTransformer(
+            transformers=[
+                ("num", numerical_transformer, self.config["numerical_features"]),
+                ("nom", nominal_transformer, self.config["nominal_features"]),
+                ("ord", ordinal_transformer, self.config["ordinal_features"]),
+                ("pass", "passthrough", self.config["passthrough_features"]),
+            ],
+            remainder = "passthrough", n_jobs = -1,)
+        return preprocessor

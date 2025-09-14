@@ -37,7 +37,7 @@ class ModelTraining:
         preprocessor (sklearn.compose.ColumnTransformer): A preprocessor pipeline for transforming numerical, nominal, and ordinal features.
         """
         self.config = config # Get configuration settings from config.yaml as a dictionary
-        self.preprocessor = preprocessor # Preprocessor object from DataPreparation
+        self.preprocessor = preprocessor # Preprocessor object from DataPreparation object
     
     def split_data(self, df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series]:
         """

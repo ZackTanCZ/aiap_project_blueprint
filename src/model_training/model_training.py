@@ -39,7 +39,7 @@ class ModelTraining:
         self.config = config # Get configuration settings from config.yaml as a dictionary
         self.preprocessor = preprocessor # Preprocessor object from DataPreparation object
     
-    def split_data(self, df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series]:
+    def split_data(self, df: pd.DataFrame, stratify: bool) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series]:
         """
         Split the data into training, validation, and test sets.
 
@@ -58,13 +58,23 @@ class ModelTraining:
 
         # Split into Training and (Validation & Testing) set 
         test_size = self.config['test_size'] # 0.2(20%)
+        if stratify == True:
+            stratify_arg = y
+        else:
+            stratify_arg = None
         X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size = test_size, 
-                                                            stratify = y, random_state = 42)
+                                                            stratify = stratify_arg, 
+                                                            random_state = 42)
 
         # Split into Validation and Testing set 
         val_size = self.config['val_size'] # 0.5(50%)
+        if stratify == True:
+            stratify_arg = y_temp
+        else:
+            stratify_arg = None
         X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size = val_size,
-                                                        stratify = y_temp, random_state = 42)
+                                                        stratify = stratify_arg, 
+                                                        random_state = 42)
         
         return (X_train, X_val, X_test, y_train, y_val, y_test)
 
